@@ -45,6 +45,9 @@ SYSTEM_APPS = [
 
 PROJECT_APPS = [
     'src.account.apps.AccountConfig',
+    'easy_thumbnails',
+    'django_cleanup',
+    'bootstrap4',
 ]
 
 INSTALLED_APPS = SYSTEM_APPS + PROJECT_APPS
@@ -86,10 +89,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DATABASE_NAME'),
-        'USER': os.getenv('DATABASE_USER'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'ENGINE': os.getenv('POSTGRES_ENGINE', default="django.db.backends.sqlite3"),
+        'NAME': os.getenv('DATABASE_NAME',  os.path.join(BASE_DIR, "db.sqlite3")),
+        'USER': os.getenv('DATABASE_USER', "user"),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', "password"),
         'HOST': os.getenv('HOST', default='127.0.0.1'),
         'PORT': os.getenv('PORT', default='5432'),
     }
@@ -152,3 +155,18 @@ LOCALE_PATHS = (
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'account.CatsUser'
+
+EMAIL_PORT = 1025
+
+THUMBNAIL_ALIASES = {
+    '': {
+        'default': {
+            'size': (96, 96),
+            'crop': 'scale',
+        },
+    },
+}
+
+THUMBNAIL_BASEDIR = 'thumbnails'

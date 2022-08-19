@@ -7,7 +7,7 @@ class CatsUserAdmin(admin.ModelAdmin):
     """
     list_display = ('__str__', 'is_activated', 'join_date')
     search_fields = ('username', 'email', 'city')
-    fields = ('password', 'username', 'email', ('city', 'country'), ('is_active', 'is_activated'))
+    fields = ('password', 'username', 'avatar', 'email', ('city', 'country'), ('is_active', 'is_activated'))
     readonly_fields = ('join_date',)
 
 
