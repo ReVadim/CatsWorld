@@ -1,10 +1,16 @@
-from django.contrib.auth.views import LoginView
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.signing import BadSignature
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, TemplateView, DeleteView, UpdateView
 
-from src.account.forms import RegisterUserForm
+from src.account.forms import RegisterUserForm, ChangeUserInfoForm
 from src.account.models import CatsUser
 from src.account.services import signer
 
@@ -33,6 +39,16 @@ def user_activate(request, sign):
     return render(request, template)
 
 
+@login_required()
+def profile(request):
+    """ User profile page
+    """
+    # cats_owner = CatsUser.objects.filter(id=request.user.pk)
+    # context = {'cats_owner': cats_owner}
+    # return render(request, 'account/profile.html', context)
+    return render(request, 'account/profile.html')
+
+
 class RegisterUserView(CreateView):
     """ New user registration
     """
@@ -52,4 +68,59 @@ class CatsUserLoginView(LoginView):
     """ Standard authentication model
     """
     template_name = 'account/login.html'
+
+
+class AccountLogoutView(LoginRequiredMixin, LogoutView):
+    """ Standard logout view
+    """
+    template_name = 'account/logout.html'
+
+
+class AccountPasswordChangeView(SuccessMessageMixin, LoginRequiredMixin, PasswordChangeView):
+    """ Change user password class
+    """
+    template_name = 'account/password_change.html'
+    success_url = reverse_lazy('src.account:profile')
+    success_message = _('Password changed')
+
+
+class DeleteUserView(LoginRequiredMixin, DeleteView):
+    """ Delete User View
+    """
+    model = CatsUser
+    template_name = 'account/delete_user.html'
+    success_url = reverse_lazy('src.account:index')
+
+    def setup(self, request, *args, **kwargs):
+        self.user_id = request.user.pk
+        return super().setup(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        logout(request)
+        messages.add_message(request, messages.SUCCESS, _('User deleted'))
+        return super().post(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        if not queryset:
+            queryset = self.get_queryset()
+        return get_object_or_404(queryset, pk=self.user_id)
+
+
+class ChangeUserInfoView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
+    """ Class for change user information
+    """
+    model = CatsUser
+    template_name = 'account/change_user_info.html'
+    form_class = ChangeUserInfoForm
+    success_url = reverse_lazy('src.account:profile')
+    success_message = _('User information changed')
+
+    def setup(self, request, *args, **kwargs):
+        self.user_id = request.user.pk
+        return super().setup(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        if not queryset:
+            queryset = self.get_queryset()
+        return get_object_or_404(queryset, pk=self.user_id)
 

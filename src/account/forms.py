@@ -50,4 +50,14 @@ class RegisterUserForm(forms.ModelForm):
 
     class Meta:
         model = CatsUser
-        fields = ['username', 'email', 'password', 'confirm_password', 'country', 'city', 'about', 'send_message']
+        fields = ['username', 'avatar', 'email', 'password', 'confirm_password', 'country', 'city', 'about', 'send_message']
+
+
+class ChangeUserInfoForm(forms.ModelForm):
+    """ Change user information form
+    """
+    email = forms.EmailField(required=True, label=_('email address'))
+
+    class Meta:
+        model = CatsUser
+        fields = ['username', 'email', 'send_message', 'avatar', 'about']
