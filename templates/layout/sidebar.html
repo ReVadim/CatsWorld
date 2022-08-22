@@ -1,11 +1,20 @@
 <nav class="col-md-auto nav flex-column border">
     <a class="nav-link root" href="{% url 'src.account:index' %}">Главная</a>
-    {% for rubric in rubrics %}
-    {% ifchanged rubric.super_rubric.pk %}
-    <span class="nav-link root font-weight-bold">{{ rubric.super_rubric.name }}</span>
-    {% endifchanged %}
-    <a class="nav-link" href="#">{{ rubric.name }}</a>
-    {% endfor %}
+
+    {% if user.is_authenticated %}
+    <div class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown"
+        href="#" role="button" aria-haspopup="true" aria-expanded="false">Профиль</a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'src.account:profile' %}">Моя страница</a>
+            <a class="dropdown-item" href="{% url 'src.account:profile_change' %}">Изменить личные данные</a>
+            <a class="dropdown-item" href="{% url 'src.account:password_change' %}">Изменить пароль</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'src.account:logout' %}">Выйти</a>
+            <div class="dropdown-divider"></div>
+        </div>
+    {% endif %}
+    </div>
     <a class="nav-link root" href="#">О сайте</a>
 
 </nav>

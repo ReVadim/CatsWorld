@@ -1,0 +1,18 @@
+{% extends 'layout/base.html' %}
+
+{% load bootstrap4 %}
+{% load thumbnail %}
+{% load static %}
+
+{% block title %}Профиль пользователя{% endblock title %}
+
+{% block content %}
+<h2>Профиль пользователя {{ user.username }}</h2>
+<p>{{ user.username }} г.{{ user.city }}</p>
+{% if user.avatar %}
+    <img src="{{ user.avatar.url }}" alt="{{ user.username }}" class="image-circle">
+{% else %}
+    <img src="{% static 'account/img/no_photo.jpg' %}" alt="{{ user.username }}" class="image-circle">
+{% endif %}
+<p>{{ user.about }}</p>
+{% endblock content %}

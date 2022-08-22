@@ -2,37 +2,32 @@
 
 {% load bootstrap4 %}
 
-{% block title %}
-Регистрация нового пользователя
-{% endblock title %}
+{% block title %}Удаление пользователя{% endblock title %}
 
 {% block content %}
-<h2 class="text-center">Заполните поля формы для регистрации</h2>
+<h2>Удаление пользователя {{ object.username }}</h2>
 <form method="post">
     {% csrf_token %}
-    {% bootstrap_form form layout='horizontal' %}
-
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Зарегистрироваться
+        Удалить аккаунт
     </button>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Регистрация</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Удаление аккаунта</h5>
             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p>Добро пожаловать в мир котиков!</p>
+            <p>Вы точно хотите удалить аккаунт? Все данные также будут удалены!</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
-            <button type="submit" class="btn btn-primary">Сохранить данные</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Отменить удаление</button>
+            <button type="submit" class="btn btn-danger">Удалить</button>
           </div>
         </div>
       </div>
     </div>
-
 </form>
 {% endblock content %}

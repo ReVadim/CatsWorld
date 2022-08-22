@@ -5,13 +5,13 @@
         <a class="nav-link dropdown-toggle" data-toggle="dropdown"
         href="#" role="button" aria-haspopup="true" aria-expanded="false">Профиль</a>
         <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Мои котики</a>
-            <a class="dropdown-item" href="#">Изменить личные данные</a>
-            <a class="dropdown-item" href="#">Изменить пароль</a>
+            <a class="dropdown-item" href="{% url 'src.account:profile' %}">Моя страница</a>
+            <a class="dropdown-item" href="{% url 'src.account:profile_change' %}">Изменить личные данные</a>
+            <a class="dropdown-item" href="{% url 'src.account:password_change' %}">Изменить пароль</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Выйти</a>
+            <a class="dropdown-item" href="{% url 'src.account:logout' %}">Выйти</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Удалить</a>
+            <a class="dropdown-item" href="{% url 'src.account:profile_delete' %}">Удалить профиль</a>
         </div>
     </li>
     {% else %}
