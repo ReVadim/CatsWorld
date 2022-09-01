@@ -12,7 +12,7 @@ from django.views.generic import CreateView, TemplateView, DeleteView, UpdateVie
 
 from src.account.forms import RegisterUserForm, ChangeUserInfoForm
 from src.account.models import CatsUser
-from src.account.services import signer
+from src.base.services import signer
 
 
 def index(request):
@@ -43,9 +43,6 @@ def user_activate(request, sign):
 def profile(request):
     """ User profile page
     """
-    # cats_owner = CatsUser.objects.filter(id=request.user.pk)
-    # context = {'cats_owner': cats_owner}
-    # return render(request, 'account/profile.html', context)
     return render(request, 'account/profile.html')
 
 

@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 from django.dispatch import Signal
-from .services import send_activation_notification
+from src.base.services import send_activation_notification
 
 
 class AccountConfig(AppConfig):

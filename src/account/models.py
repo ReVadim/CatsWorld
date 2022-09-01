@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import FileExtensionValidator
-from .services import (
+from src.base.services import (
     get_path_upload_avatar,
     validate_size_image,
 )
