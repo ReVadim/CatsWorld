@@ -1,0 +1,20 @@
+
+.root {
+    font-size: larger;
+}
+
+img.main-image {
+    width: 300px;
+}
+img.additional-image {
+    width: 180px;
+}
+
+.container-fluid {
+    background: url("../img/bg-fon.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+ul {
+    background: none;
+}

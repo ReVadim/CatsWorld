@@ -45,6 +45,7 @@ SYSTEM_APPS = [
 
 PROJECT_APPS = [
     'src.account.apps.AccountConfig',
+    'src.cats.apps.CatsConfig',
     'easy_thumbnails',
     'django_cleanup',
     'bootstrap4',

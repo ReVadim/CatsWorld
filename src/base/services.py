@@ -32,3 +32,9 @@ def send_activation_notification(user):
     subject = render_to_string('email/activation_letter_subject.txt', context)
     body_text = render_to_string('email/activation_letter_body.txt', context)
     user.email_user(subject, body_text)
+
+
+def get_path_upload_photo(instance, file):
+    """ Building a file path, format: (media)/photos/user_id/photo.jpg
+    """
+    return f'photos/user_{instance.id}/{file}'
