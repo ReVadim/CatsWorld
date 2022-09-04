@@ -157,7 +157,7 @@ LOCALE_PATHS = (
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'account.CatsUser'
+AUTH_USER_MODEL = 'account.CatsOwner'
 
 EMAIL_PORT = 1025
 
