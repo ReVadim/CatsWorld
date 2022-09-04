@@ -1,5 +1,4 @@
 <ul class="col nav justify-content-end border">
-    <li class="nav-item"><a class="nav-link" href="{% url 'src.account:register' %}">Регистрация</a></li>
     {% if user.is_authenticated %}
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown"
@@ -15,6 +14,7 @@
         </div>
     </li>
     {% else %}
+    <li class="nav-item"><a class="nav-link" href="{% url 'src.account:register' %}">Регистрация</a></li>
     <li class="nav-item"><a class="nav-link" href="{% url 'src.account:login' %}">Вход</a></li>
     {% endif %}
 </ul>

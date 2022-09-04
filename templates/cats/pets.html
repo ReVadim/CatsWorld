@@ -1,0 +1,32 @@
+{% extends 'layout/base.html' %}
+
+{% load bootstrap4 %}
+{% load thumbnail %}
+{% load static %}
+
+{% block title %}Мои питомцы{% endblock title %}
+
+{% block content %}
+{% if cats %}
+{% for cat in cats %}
+    <div class="col-md-auto">
+        {% if cat.photo %}
+        <img src="{{ cat.photo.url }}" class="main-image">
+        <p>{{ cat.name }}</p>
+        {% else %}
+        <p>Нет фото</p>
+        <p>{{ cat.name }}</p>
+        {% endif %}
+    </div>
+
+{% endfor %}
+{% else %}
+    <p>Здесь еще никого нет</p>
+{% endif %}
+
+<form>
+    <a href="{% url 'src.cats:register_pet' %}">
+        <input type="button" class="btn btn-primary" value="Добавить питомца">
+    </a>
+</form>
+{% endblock content %}

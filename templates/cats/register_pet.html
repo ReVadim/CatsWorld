@@ -1,0 +1,18 @@
+{% extends 'layout/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}
+Регистрация нового питомца
+{% endblock title %}
+
+{% block content %}
+<h2 class="text-center">Заполните поля формы для регистрации</h2>
+<form method="post" enctype='multipart/form-data'>
+    {% csrf_token %}
+    {% bootstrap_form form layout='horizontal' %}
+<button type="submit" class="btn btn-primary">
+    Добавить
+</button>
+</form>
+{% endblock content %}

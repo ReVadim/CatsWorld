@@ -8,11 +8,18 @@
 
 {% block content %}
 <h2>Профиль пользователя {{ user.username }}</h2>
-<p>{{ user.username }} г.{{ user.city }}</p>
+<p>{{ user.username }} из г.{{ user.city }}</p>
 {% if user.avatar %}
-    <img src="{{ user.avatar.url }}" alt="{{ user.username }}" class="image-circle">
+    <div class="col-md-auto">
+        <img src="{{ user.avatar.url }}" alt="{{ user.username }}" class="main-image">
+    </div>
 {% else %}
-    <img src="{% static 'account/img/no_photo.jpg' %}" alt="{{ user.username }}" class="image-circle">
+    <img src="{% static 'account/img/no_photo.jpg' %}" alt="load your avatar" class="image-circle">
 {% endif %}
 <p>{{ user.about }}</p>
+<form>
+    <a href="{% url 'src.cats:detail' %}">
+        <input type="button" value="Мои питомцы">
+    </a>
+</form>
 {% endblock content %}

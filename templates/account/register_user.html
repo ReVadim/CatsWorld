@@ -8,7 +8,7 @@
 
 {% block content %}
 <h2 class="text-center">Заполните поля формы для регистрации</h2>
-<form method="post">
+<form method="post" enctype='multipart/form-data'>
     {% csrf_token %}
     {% bootstrap_form form layout='horizontal' %}
 
