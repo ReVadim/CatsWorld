@@ -2,12 +2,14 @@ from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from src.base.services import get_path_upload_photo, validate_size_image
+from src.account.models import CatsOwner
+from ..base.services import get_path_upload_photo, validate_size_image
 
 
 class Cats(models.Model):
     """ Main model include all information about cats
     """
+    owner = models.ForeignKey(CatsOwner, on_delete=models.CASCADE)
     name = models.CharField(max_length=30, verbose_name=_("name"))
     birthday = models.DateField()
     color = models.CharField(max_length=150, verbose_name=_("color"))

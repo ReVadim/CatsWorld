@@ -5,7 +5,7 @@ from .views import (
     RegisterUserView,
     RegisterDoneView,
     user_activate,
-    CatsUserLoginView,
+    CatsOwnerLoginView,
     AccountLogoutView,
     AccountPasswordChangeView,
     DeleteUserView,
@@ -20,7 +20,7 @@ urlpatterns = [
             path('done/', RegisterDoneView.as_view(), name='register_done'),
             path('', RegisterUserView.as_view(), name='register'),
         ])),
-        path('login/', CatsUserLoginView.as_view(), name='login'),
+        path('login/', CatsOwnerLoginView.as_view(), name='login'),
         path('logout/', AccountLogoutView.as_view(), name='logout'),
         path('password/change', AccountPasswordChangeView.as_view(), name='password_change'),
         path('profile/', include([

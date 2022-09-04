@@ -11,7 +11,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, TemplateView, DeleteView, UpdateView
 
 from src.account.forms import RegisterUserForm, ChangeUserInfoForm
-from src.account.models import CatsUser
+from src.account.models import CatsOwner
 from src.base.services import signer
 
 
@@ -28,7 +28,7 @@ def user_activate(request, sign):
         username = signer.unsign(sign)
     except BadSignature:
         return render(request, 'account/bad_signature.html')
-    user = get_object_or_404(CatsUser, username=username)
+    user = get_object_or_404(CatsOwner, username=username)
     if user.is_activated:
         template = 'account/user_is_activated.html'
     else:
@@ -49,7 +49,7 @@ def profile(request):
 class RegisterUserView(CreateView):
     """ New user registration
     """
-    model = CatsUser
+    model = CatsOwner
     template_name = 'account/register_user.html'
     form_class = RegisterUserForm
     success_url = reverse_lazy('src.account:register_done')
@@ -61,7 +61,7 @@ class RegisterDoneView(TemplateView):
     template_name = 'account/register_done.html'
 
 
-class CatsUserLoginView(LoginView):
+class CatsOwnerLoginView(LoginView):
     """ Standard authentication model
     """
     template_name = 'account/login.html'
@@ -84,7 +84,7 @@ class AccountPasswordChangeView(SuccessMessageMixin, LoginRequiredMixin, Passwor
 class DeleteUserView(LoginRequiredMixin, DeleteView):
     """ Delete User View
     """
-    model = CatsUser
+    model = CatsOwner
     template_name = 'account/delete_user.html'
     success_url = reverse_lazy('src.account:index')
 
@@ -106,7 +106,7 @@ class DeleteUserView(LoginRequiredMixin, DeleteView):
 class ChangeUserInfoView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     """ Class for change user information
     """
-    model = CatsUser
+    model = CatsOwner
     template_name = 'account/change_user_info.html'
     form_class = ChangeUserInfoForm
     success_url = reverse_lazy('src.account:profile')

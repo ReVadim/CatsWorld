@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CatsUser
+from .models import CatsOwner
 
 
 class CatsUserAdmin(admin.ModelAdmin):
@@ -11,4 +11,4 @@ class CatsUserAdmin(admin.ModelAdmin):
     readonly_fields = ('join_date',)
 
 
-admin.site.register(CatsUser, CatsUserAdmin)
+admin.site.register(CatsOwner, CatsUserAdmin)

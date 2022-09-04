@@ -3,13 +3,13 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import FileExtensionValidator
-from src.base.services import (
+from ..base.services import (
     get_path_upload_avatar,
     validate_size_image,
 )
 
 
-class CatsUser(AbstractUser):
+class CatsOwner(AbstractUser):
     """ Custom user model
     """
     REQUIRED_FIELDS = ['username']

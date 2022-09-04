@@ -3,7 +3,7 @@ from django.contrib.auth import password_validation
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from .apps import user_registered
-from .models import CatsUser
+from .models import CatsOwner
 
 
 class RegisterUserForm(forms.ModelForm):
@@ -49,8 +49,10 @@ class RegisterUserForm(forms.ModelForm):
         return user
 
     class Meta:
-        model = CatsUser
-        fields = ['username', 'avatar', 'email', 'password', 'confirm_password', 'country', 'city', 'about', 'send_message']
+        model = CatsOwner
+        fields = [
+            'username', 'avatar', 'email', 'password', 'confirm_password', 'country', 'city', 'about', 'send_message'
+        ]
 
 
 class ChangeUserInfoForm(forms.ModelForm):
@@ -59,5 +61,5 @@ class ChangeUserInfoForm(forms.ModelForm):
     email = forms.EmailField(required=True, label=_('email address'))
 
     class Meta:
-        model = CatsUser
-        fields = ['username', 'email', 'send_message', 'avatar', 'about']
+        model = CatsOwner
+        fields = ['username', 'country', 'city', 'email', 'send_message', 'avatar', 'about']
