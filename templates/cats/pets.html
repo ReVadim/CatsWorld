@@ -11,19 +11,19 @@
 {% for cat in cats %}
     <div class="col-md-auto">
         {% if cat.photo %}
-        <img src="{{ cat.photo.url }}" class="main-image">
-        <p>{{ cat.name }}</p>
+        <img src="{{ cat.photo.url }}" class="rounded-circle" width="200">
+        <br>
         {% else %}
         <p>Нет фото</p>
-        <p>{{ cat.name }}</p>
         {% endif %}
+        <a  href="{% url 'src.cats:pet_detail' pk=cat.pk %}">{{ cat.name }}</a>
     </div>
 
 {% endfor %}
 {% else %}
     <p>Здесь еще никого нет</p>
 {% endif %}
-
+<br>
 <form>
     <a href="{% url 'src.cats:register_pet' %}">
         <input type="button" class="btn btn-primary" value="Добавить питомца">

@@ -1,0 +1,27 @@
+{% extends 'layout/base.html' %}
+
+{% load bootstrap4 %}
+{% load static %}
+
+{% block title %}{{ pet.name }}{% endblock title %}
+
+{% block content %}
+{% for p in pet %}
+<h1>{{ p.name }}</h1>
+{% if p.photo %}
+    <img src="{{ p.photo.url }}" class="main-image"><br>
+{% else %}
+    <img src="{% static 'account/img/no_photo.jpg' %}" alt="load your avatar" class="round-circle">
+{% endif %}
+<h3>О питомце: </h3><br>
+<p>Имя: <i>{{ p.name }}</i></p><br>
+<p>Цвет: {{ p.color }}</p>
+<p>Дата рождения: {{ p.birthday }}</p>
+<p>Темперамент: <strong>{{ p.temperament }}</strong></p>
+{{ p.description }}<br>
+<br>
+<p><a href="{% url 'src.cats:detail'%}">Назад</a></p>
+<p><a href="{% url 'src.cats:change_info' pk=p.pk %}">Редактировать</a></p>
+{% endfor %}
+
+{% endblock content %}
