@@ -1,12 +1,12 @@
 import pytest
 
-from src.account.models import CatsUser
+from src.account.models import CatsOwner
 
 
 @pytest.mark.django_db
 def test_create_user():
     """ test: create user """
-    user = CatsUser.objects.create(
+    user = CatsOwner.objects.create(
         is_activated=True,
         email='test_user_first@email.com',
         country='Russia',

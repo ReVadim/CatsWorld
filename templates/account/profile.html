@@ -11,7 +11,7 @@
 <p>{{ user.username }} из г.{{ user.city }}</p>
 {% if user.avatar %}
     <div class="col-md-auto">
-        <img src="{{ user.avatar.url }}" alt="{{ user.username }}" class="main-image">
+        <img src="{{ user.avatar.url }}" alt="{{ user.username }}" class="rounded-circle" width="200">
     </div>
 {% else %}
     <img src="{% static 'account/img/no_photo.jpg' %}" alt="load your avatar" class="image-circle">
@@ -19,7 +19,7 @@
 <p>{{ user.about }}</p>
 <form>
     <a href="{% url 'src.cats:detail' %}">
-        <input type="button" value="Мои питомцы">
+        <input type="button" class="btn btn-primary" value="Мои питомцы">
     </a>
 </form>
 {% endblock content %}

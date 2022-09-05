@@ -1,9 +1,9 @@
-Dear {{ user.username }}!
+Дорогой {{ user.username }}!
 
-You have registered on the classifieds site.
-You need to perform activation to confirm your identity.
-To do this, please follow the link:
+Вы зарегистрировались на кошачем сайте.
+Вам необходимо выполнить активацию, чтобы подтвердить свою личность.
+Для этого, пожалуйста, перейдите по ссылке:
 
 {{ host }}{% url 'src.account:register_activate' sign=sign %}
 
-See you on the website!
+Увидимся на сайте!

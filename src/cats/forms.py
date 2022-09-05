@@ -16,3 +16,11 @@ class RegisterCatForm(forms.ModelForm):
     class Meta:
         model = Cats
         fields = ['name', 'birthday', 'color', 'temperament', 'description', 'photo']
+
+
+class ChangePetInfoForm(forms.ModelForm):
+    """ Change pet info
+    """
+    class Meta:
+        model = Cats
+        fields =['name', 'birthday', 'color', 'temperament', 'description', 'photo']
