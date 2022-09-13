@@ -35,6 +35,12 @@ def send_activation_notification(user):
 
 
 def get_path_upload_photo(instance, file):
-    """ Building a file path, format: (media)/photos/user_id/photo.jpg
+    """ Building a file path, format: (media)/photos/user_id/pet_name/photo.jpg
     """
-    return f'photos/user_{instance.id}/{file}'
+    name_folder = str(instance).split()[-1]
+    return f'photos/user_{instance.owner.id}/{name_folder}/{file}'
+
+
+def set_path_to_upload(owner, pet, name, filename):
+    """ Building a file path, format: (media)/photos/user_id/album_name/photo.jpg"""
+    return f'photos/user_{owner}/{name}/id-{pet}_{filename}'
