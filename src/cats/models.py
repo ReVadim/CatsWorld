@@ -3,7 +3,15 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from src.account.models import CatsOwner
-from ..base.services import get_path_upload_photo, validate_size_image
+from ..base.services import get_path_upload_photo, validate_size_image, set_path_to_upload
+
+
+def upload_into_album(instance, file):
+    """ """
+    owner_id = instance.pet.owner.id
+    pet_id = instance.pet.id
+    pet_name = instance.pet.name
+    return set_path_to_upload(owner_id, pet_id, pet_name, file)
 
 
 class Cats(models.Model):
@@ -29,3 +37,22 @@ class Cats(models.Model):
     class Meta:
         verbose_name = _('pet')
         verbose_name_plural = _('pets')
+
+
+class PetPhotoAlbum(models.Model):
+    """ Class album with photos, for individual pets. Includes meta information about the photo.
+    """
+    pet = models.ForeignKey(Cats, on_delete=models.CASCADE, verbose_name=_('pet'))
+    title = models.CharField(max_length=30, verbose_name=_('title'), default='')
+    photo = models.ImageField(
+        verbose_name=_('photo'),
+        height_field='img_height',
+        width_field='img_width',
+        upload_to=upload_into_album,
+        validators=[FileExtensionValidator(allowed_extensions=['jpg']), validate_size_image]
+    )
+    img_height = models.PositiveIntegerField(verbose_name=_('height'))
+    img_width = models.PositiveIntegerField(verbose_name=_('width'))
+
+    def _upload_to(self, filename):
+        return f'{self.pet.name}/{self.pk}/{filename}'

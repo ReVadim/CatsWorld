@@ -1,10 +1,12 @@
 from django import forms
-
 from .models import Cats
 
 
 class RegisterCatForm(forms.ModelForm):
-    """ Add new users pet """
+    """ Add new users pet
+    """
+    birthday = forms.DateField(widget=forms.DateInput(format='%d-%m-%Y', attrs={'type': 'date'}))
+
     def __init__(self, owner, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.owner = owner
@@ -21,6 +23,8 @@ class RegisterCatForm(forms.ModelForm):
 class ChangePetInfoForm(forms.ModelForm):
     """ Change pet info
     """
+    birthday = forms.DateField(widget=forms.DateInput(format='%d-%m-%Y', attrs={'type': 'date'}))
+
     class Meta:
         model = Cats
-        fields =['name', 'birthday', 'color', 'temperament', 'description', 'photo']
+        fields = ['name', 'birthday', 'color', 'temperament', 'description', 'photo']
