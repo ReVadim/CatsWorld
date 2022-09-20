@@ -5,9 +5,10 @@
 {% block title %}
 Регистрация нового пользователя
 {% endblock title %}
-
+{% block sidebar %}
+{% endblock sidebar %}
 {% block content %}
-<h2 class="text-center">Заполните поля формы для регистрации</h2>
+<h2 class="text-center">Заполните поля формы для регистрации</h2><br>
 <form method="post" enctype='multipart/form-data'>
     {% csrf_token %}
     {% bootstrap_form form layout='horizontal' %}

@@ -7,19 +7,32 @@
 {% block title %}Профиль пользователя{% endblock title %}
 
 {% block content %}
-<h2>Профиль пользователя {{ user.username }}</h2>
-<p>{{ user.username }} из г.{{ user.city }}</p>
-{% if user.avatar %}
-    <div class="col-md-auto">
-        <img src="{{ user.avatar.url }}" alt="{{ user.username }}" class="rounded-circle" width="200">
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+            <h2>Профиль пользователя {{ user.username }}</h2><br>
+        </div>
     </div>
-{% else %}
-    <img src="{% static 'account/img/no_photo.jpg' %}" alt="load your avatar" class="image-circle">
-{% endif %}
-<p>{{ user.about }}</p>
-<form>
-    <a href="{% url 'src.cats:detail' %}">
-        <input type="button" class="btn btn-primary" value="Мои питомцы">
-    </a>
-</form>
+    <div class="row">
+        <div class="col">
+            {% if user.avatar %}
+                <div class="col-md-auto">
+                    <img src="{{ user.avatar.url }}" alt="{{ user.username }}" class="rounded-circle" width="200">
+                </div>
+            {% else %}
+                <img src="{% static 'account/img/no_photo.jpg' %}" alt="load your avatar" class="image-circle">
+            {% endif %}
+        </div>
+        <div class="p-3 mb-2 bg-light text-dark">
+            <p class="text-primary">{{ user.username }} из г.{{ user.city }}</p>
+            <p class="text-info">{{ user.about }}</p>
+        </div>
+    </div>
+    <br>
+    <form>
+        <a href="{% url 'src.cats:detail' %}">
+            <input type="button" class="btn btn-primary" value="Мои питомцы">
+        </a>
+    </form>
+</div>
 {% endblock content %}

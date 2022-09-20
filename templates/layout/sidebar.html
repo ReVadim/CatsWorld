@@ -1,13 +1,13 @@
-<nav class="col-md-auto nav flex-column border">
+<nav class="col-md-auto nav flex-column">
     <a class="nav-link root" href="{% url 'src.account:index' %}">Главная</a>
-
+    <a class="nav-link root" href="https:github.com/revadim">GitHub</a>
     {% if user.is_authenticated %}
     <div class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown"
         href="#" role="button" aria-haspopup="true" aria-expanded="false">Профиль</a>
         <div class="dropdown-menu">
             <a class="dropdown-item" href="{% url 'src.account:profile' %}">Моя страница</a>
-            <a class="dropdown-item" href="#">Мои питомцы</a>
+            <a class="dropdown-item" href="{% url 'src.cats:detail' %}">Мои питомцы</a>
             <a class="dropdown-item" href="{% url 'src.account:profile_change' %}">Изменить личные данные</a>
             <a class="dropdown-item" href="{% url 'src.account:password_change' %}">Изменить пароль</a>
             <div class="dropdown-divider"></div>
@@ -16,6 +16,5 @@
         </div>
     {% endif %}
     </div>
-    <a class="nav-link root" href="#">О сайте</a>
 
 </nav>
