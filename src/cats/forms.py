@@ -1,5 +1,5 @@
 from django import forms
-from .models import Cats
+from .models import Cats, PetPhotoAlbum
 
 
 class RegisterCatForm(forms.ModelForm):
@@ -27,4 +27,21 @@ class ChangePetInfoForm(forms.ModelForm):
 
     class Meta:
         model = Cats
-        fields = ['name', 'birthday', 'color', 'temperament', 'description', 'photo']
+        fields = ['birthday', 'color', 'temperament', 'description', 'photo']
+
+
+class AddPhotoToAlbumForm(forms.ModelForm):
+    """ Add photo to album
+    """
+
+    def __init__(self, pet_id, *args, **kwargs):
+        self.pet = Cats.objects.get(id=pet_id)
+        super(AddPhotoToAlbumForm, self).__init__(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        self.instance.pet = self.pet
+        return super(AddPhotoToAlbumForm, self).save(*args, **kwargs)
+
+    class Meta:
+        model = PetPhotoAlbum
+        fields = ['title', 'photo']

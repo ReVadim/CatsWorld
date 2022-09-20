@@ -62,4 +62,4 @@ class ChangeUserInfoForm(forms.ModelForm):
 
     class Meta:
         model = CatsOwner
-        fields = ['username', 'country', 'city', 'email', 'send_message', 'avatar', 'about']
+        fields = ['country', 'city', 'email', 'send_message', 'avatar', 'about']

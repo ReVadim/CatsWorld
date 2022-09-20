@@ -37,6 +37,12 @@ class Cats(models.Model):
     class Meta:
         verbose_name = _('pet')
         verbose_name_plural = _('pets')
+        ordering = ['-birthday']
+        db_table = 'pets'
+        constraints = (
+            models.UniqueConstraint(fields=('color', 'name', 'owner'),
+                                    name='%(app_label)s_%(class)s_pet_individual_constraint'),
+        )
 
 
 class PetPhotoAlbum(models.Model):
@@ -54,5 +60,5 @@ class PetPhotoAlbum(models.Model):
     img_height = models.PositiveIntegerField(verbose_name=_('height'))
     img_width = models.PositiveIntegerField(verbose_name=_('width'))
 
-    def _upload_to(self, filename):
-        return f'{self.pet.name}/{self.pk}/{filename}'
+    def __str__(self):
+        return f'{self.title}:{self.img_width}x{self.img_height}px'

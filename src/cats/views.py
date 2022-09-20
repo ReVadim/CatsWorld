@@ -5,9 +5,8 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
-from src.account.models import CatsOwner
-from src.cats.forms import RegisterCatForm, ChangePetInfoForm
-from src.cats.models import Cats
+from src.cats.forms import RegisterCatForm, ChangePetInfoForm, AddPhotoToAlbumForm
+from src.cats.models import Cats, PetPhotoAlbum
 
 
 @login_required()
@@ -36,7 +35,8 @@ def pet_detail(request, pk):
     """ Full information about pet
     """
     pet = Cats.objects.filter(pk=pk)
-    context = {'pet': pet}
+    images = PetPhotoAlbum.objects.filter(pet_id=pk)
+    context = {'pet': pet, 'images': images}
     return render(request, 'cats/pet_detail.html', context)
 
 
@@ -57,3 +57,22 @@ class ChangePetDetailView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
         if not queryset:
             queryset = self.get_queryset()
         return get_object_or_404(queryset, pk=self.cats_id)
+
+
+class AddPhotoToAlbumView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
+    """ Add new photo to album
+    """
+    model = PetPhotoAlbum
+    template_name = 'cats/add_photo_to_album.html'
+    form_class = AddPhotoToAlbumForm
+    success_url = reverse_lazy('src.cats:detail')
+    success_message = 'Фотография успешно добавлена'
+
+    def setup(self, request, *args, **kwargs):
+        self.cats_id = kwargs['pet_id']
+        return super().setup(request, *args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super(AddPhotoToAlbumView, self).get_form_kwargs()
+        kwargs['pet_id'] = self.cats_id
+        return kwargs
