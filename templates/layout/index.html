@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load bootstrap4 %}
+{% load static %}
+{% load i18n %}
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% translate 'The Cats World' %}</title>
+        <style>
+            .container-fluid {
+              background: url("../static/account/img/1920x1200_black.jpeg");
+              background-attachment: fixed, fixed;
+            }
+            #empty {
+                margin: 100px;
+                padding: 100px;
+            }
+            #carousel {
+                padding: 20px;
+            }
+        </style>
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='slim' %}
+    </head>
+    <body class="container-fluid">
+        <div class="container">
+            {% include 'layout/header.html' %}
+            {% include 'layout/navbar.html' %}
+            <div class="row" id="carousel">
+                {% include 'layout/carousel.html' %}
+            </div>
+            <div class="row" id="empty">
+
+            </div>
+            <div class="row">
+                {% if images %}
+                    {% for image in images %}
+                        <div class="col-lg-3 col-md-4 col-6 thumb">
+                            <a data-fancybox="gallery" href="{{ image.photo.url }}">
+                                <img class="img-fluid" src="{{ image.photo.url }}" alt="{{ image.title }}">
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="row">
+                {% include 'layout/footer.html' %}
+            </div>
+        </div>
+    </body>
+</html>
