@@ -24,6 +24,7 @@
             <img src="{{ cat.photo.url }}" class="rounded-circle" width="200">
             <br>
             {% else %}
+            <img src="{% static 'account/img/no_photo.png' %}" alt="load your avatar" class="image-circle">
             <p>Нет фото</p>
             {% endif %}
             <a href="{% url 'src.cats:pet_detail' pk=cat.pk %}">{{ cat.name }}</a>

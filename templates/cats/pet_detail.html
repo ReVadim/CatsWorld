@@ -16,7 +16,7 @@
             {% if p.photo %}
                 <img src="{{ p.photo.url }}" class="main-image"><br>
             {% else %}
-                <img src="{% static 'account/img/no_photo.jpg' %}" alt="load your avatar" class="round-circle">
+                <img src="{% static 'account/img/no_photo.png' %}" alt="load your avatar" class="image-circle">
             {% endif %}<br>
             <p><a href="{% url 'src.cats:add_photo' pet_id=p.pk %}">Добавить фото</a></p>
             <p><a href="{% url 'src.cats:change_info' pk=p.pk %}">Редактировать</a></p>
@@ -34,7 +34,9 @@
             {% if images %}
                 <h3>Фотографии:</h3>
                 {% for image in images %}
-                    <img src="{{ image.photo.url }}" class="additional-image"><br>
+                    <a data-fancybox="gallery" href="{{ image.photo.url }}">
+                            <img src="{{ image.photo.url }}" class="additional-image">
+                    </a><br>
                     <p>{{ image.title }}</p>
                 {% endfor %}
                 {% else %}

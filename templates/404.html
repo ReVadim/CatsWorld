@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+{% load bootstrap4 %}
+{% load i18n %}
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>{% translate 'Page not found' %}</title>
+  {% bootstrap_css %}
+   <link rel="stylesheet" type="text/css" href="{% static 'account/css/style.css' %}">
+  <style>
+    .container-fluid {
+    background: url("../static/account/img/page_not_found.png") no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  </style>
+</head>
+
+<body class="container-fluid">
+  <div class="container">
+
+    <div id="bg">
+        <h2>{% translate 'Page not found' %}</h2>
+        <p>{% translate 'We’re sorry, but the requested page could not be found.' %}</p>
+      <a href="{% url 'src.account:index' %}">Главная</a>
+    </div>
+
+  </div>
+</body>
+</html>
