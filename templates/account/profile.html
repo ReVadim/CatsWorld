@@ -13,11 +13,11 @@
             <h2>Профиль пользователя {{ user.username }}</h2><br>
         </div>
     </div>
-    <div class="row">
-        <div class="col">
+    <div class="row p-2">
+        <div class="col overflow-hidden">
             {% if user.avatar %}
                 <div class="col-md-auto">
-                    <img src="{{ user.avatar.url }}" alt="{{ user.username }}" class="rounded-circle" width="200">
+                    <img src="{{ user.avatar.url }}" alt="{{ user.username }}" class="rounded-circle" width="230" height="230">
                 </div>
             {% else %}
                 <img src="{% static 'account/img/no_photo.png' %}" alt="load your avatar" class="image-circle">

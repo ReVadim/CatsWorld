@@ -16,13 +16,15 @@
             <div class="row">
                 {% include 'layout/navbar.html' %}
             </div>
+        </div>
+        <div class="container">
             <div class="row">
                 <div class="col col-lg-2">
                     {% block sidebar %}
                     {% include 'layout/sidebar.html' %}
                     {% endblock sidebar %}
                 </div>
-                <div class="col-md-auto">
+                <div class="col">
                     <section class="col py-2">
                         {% bootstrap_messages %}
                         {% block content %}

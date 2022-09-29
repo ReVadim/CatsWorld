@@ -15,25 +15,28 @@
 {% endblock sidebar %}
 {% block content %}
 <div class="container">
-
     {% if cats %}
     <div class="row">
         {% for cat in cats %}
         <div class="col">
-            {% if cat.photo %}
-            <img src="{{ cat.photo.url }}" class="rounded-circle" width="200">
-            <br>
-            {% else %}
-            <img src="{% static 'account/img/no_photo.png' %}" alt="load your avatar" class="image-circle">
-            <p>Нет фото</p>
-            {% endif %}
-            <a href="{% url 'src.cats:pet_detail' pk=cat.pk %}">{{ cat.name }}</a>
+            <figure class="figure">
+                {% if cat.photo %}
+                    <a data-fancybox="gallery" href="{{ cat.photo.url }}">
+                        <img src="{{ cat.photo.url }}" class="rounded-circle overflow-hidden" width="200" height="200">
+                    </a>
+                {% else %}
+                    <img src="{% static 'account/img/no_photo.png' %}" alt="no photo">
+                {% endif %}
+                    <figcaption class="figure-caption text-center">
+                        <a href="{% url 'src.cats:pet_detail' pk=cat.pk %}">{{ cat.name }}</a>
+                    </figcaption>
+            </figure>
         </div>
         {% endfor %}
     </div>
     {% else %}
-        <p>Здесь еще никого нет</p>
+        <h3>Здесь еще никого нет</h3>
     {% endif %}
-
 </div>
+
 {% endblock content %}

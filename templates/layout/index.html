@@ -9,15 +9,21 @@
         <title>{% translate 'The Cats World' %}</title>
         <style>
             .container-fluid {
-              background: url("../static/account/img/1920x1200_black.jpeg");
+              background: url("../static/account/img/1280x720_gray.jpeg");
               background-attachment: fixed, fixed;
             }
             #empty {
-                margin: 100px;
-                padding: 100px;
+                height: 300px;
             }
             #carousel {
-                padding: 20px;
+                margin-top: 20px;
+                width: 600px;
+                height: 450px;
+            }
+            #images {
+                margin: 5px;
+                width: 250px;
+                height: 250px;
             }
         </style>
         {% bootstrap_css %}
@@ -25,10 +31,14 @@
     </head>
     <body class="container-fluid">
         <div class="container">
+            <div class="sticky-top">
             {% include 'layout/header.html' %}
             {% include 'layout/navbar.html' %}
-            <div class="row" id="carousel">
-                {% include 'layout/carousel.html' %}
+            </div>
+            <div class="row justify-content-center align-items-center">
+                <div class="row overflow-hidden" id="carousel">
+                    {% include 'layout/carousel.html' %}
+                </div>
             </div>
             <div class="row" id="empty">
 
@@ -37,9 +47,14 @@
                 {% if images %}
                     {% for image in images %}
                         <div class="col-lg-3 col-md-4 col-6 thumb">
-                            <a data-fancybox="gallery" href="{{ image.photo.url }}">
-                                <img class="img-fluid" src="{{ image.photo.url }}" alt="{{ image.title }}">
-                            </a>
+                            <figure class="figure">
+                                <a data-fancybox="gallery" href="{{ image.photo.url }}">
+                                    <img class="img-fluid overflow-hidden" id="images" src="{{ image.photo.url }}" alt="{{ image.title }}">
+                                </a>
+                                <figcaption class="figure-caption text-center">
+                                    {{ image.title }}
+                                </figcaption>
+                            </figure>
                         </div>
                     {% endfor %}
                 {% endif %}
