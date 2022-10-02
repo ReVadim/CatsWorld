@@ -13,12 +13,16 @@ from django.views.generic import CreateView, TemplateView, DeleteView, UpdateVie
 from src.account.forms import RegisterUserForm, ChangeUserInfoForm
 from src.account.models import CatsOwner
 from src.base.services import signer
+from src.cats.models import PetPhotoAlbum, Cats
 
 
 def index(request):
     """ Main page
     """
-    return render(request, 'account/index.html')
+    images = PetPhotoAlbum.objects.order_by("-id")[:12]
+    cat = Cats.objects.last
+    pets = Cats.objects.all()[1:9]
+    return render(request, 'layout/index.html', context={'images': images, 'cat': cat, 'pets': pets})
 
 
 def user_activate(request, sign):

@@ -28,7 +28,7 @@ class Cats(models.Model):
         blank=True,
         null=True,
         verbose_name=_("avatar"),
-        validators=[FileExtensionValidator(allowed_extensions=['jpg']), validate_size_image]
+        validators=[FileExtensionValidator(allowed_extensions=['jpg', 'png']), validate_size_image]
     )
 
     def __str__(self):
@@ -55,7 +55,7 @@ class PetPhotoAlbum(models.Model):
         height_field='img_height',
         width_field='img_width',
         upload_to=upload_into_album,
-        validators=[FileExtensionValidator(allowed_extensions=['jpg']), validate_size_image]
+        validators=[FileExtensionValidator(allowed_extensions=['jpg', 'png']), validate_size_image]
     )
     img_height = models.PositiveIntegerField(verbose_name=_('height'))
     img_width = models.PositiveIntegerField(verbose_name=_('width'))

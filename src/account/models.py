@@ -32,7 +32,7 @@ class CatsOwner(AbstractUser):
         blank=True,
         null=True,
         verbose_name=_("avatar"),
-        validators=[FileExtensionValidator(allowed_extensions=['jpg']), validate_size_image]
+        validators=[FileExtensionValidator(allowed_extensions=['jpg', 'png']), validate_size_image]
     )
 
     def __str__(self):
