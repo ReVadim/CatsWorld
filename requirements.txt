@@ -9,3 +9,4 @@ python-dotenv==0.21.1
 sqlparse==0.4.2
 tzdata==2022.2
 bootstrap4==0.1.0
+django-forms-bootstrap==3.1.0
